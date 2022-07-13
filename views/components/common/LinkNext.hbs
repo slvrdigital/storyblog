@@ -1,0 +1,20 @@
+{{#if (and label href)}}
+  <a href='{{href}}' class='opacity-50 hover:opacity-100'>
+    <span class='align-middle font-secondary text-lg xl:text-2xl'>
+      {{label}}
+    </span>
+
+    <svg
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      fill-rule='evenodd'
+      clip-rule='evenodd'
+      fill='currentColor'
+      class='inline align-middle w-5 xl:w-6'
+    >
+      <path
+        d='M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z'
+      ></path>
+    </svg>
+  </a>
+{{/if}}

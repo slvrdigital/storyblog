@@ -1,0 +1,38 @@
+<header
+  id='header'
+  class='{{class}}'
+>
+  <div class='container'>
+    <div class='grid gap-8 sm:grid-cols-2'>
+      <div>
+        <a href='{{ routePath Routes.INDEX }}' class='group title-4'>
+          {{{ meta.siteName }}}
+        </a>
+      </div>
+
+      <div class='flex sm:justify-end'>
+        <nav class='grid gap-2 sm:justify-end'>
+          <a href='{{ routePath Routes.INDEX }}' class='font-secondary text-lg xl:text-2xl'>
+            Index
+          </a>
+          <a
+            href='{{ routePath Routes.STORIES }}'
+            class='font-secondary text-lg xl:text-2xl'
+          >
+            Stories
+          </a>
+          <a
+            href='{{ routePath Routes.POSTS }}'
+            class='font-secondary text-lg xl:text-2xl'
+          >
+            Archive
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  {{#if @partial-block}}
+    {{> @partial-block }}
+  {{/if}}
+</header>

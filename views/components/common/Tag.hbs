@@ -1,0 +1,15 @@
+{{#if label}}
+  <a href='{{link}}' class='title-6 italic mx-1 opacity-50 hover:opacity-100 {{#if active}}opacity-100{{/if}}'>
+    {{#truncate label max=60}}
+      <span class='read-more'>
+        (...)
+      </span>
+    {{/truncate}}
+
+    {{#if items}}
+      <sup class="italic">
+        ({{{ items }}})
+      </sup>
+    {{/if}}
+  </a>
+{{/if}}

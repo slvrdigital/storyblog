@@ -1,0 +1,15 @@
+<section>
+  <div class='container'>
+    {{#if title}}
+      <h2 class='title-2 mb-4 xl:mb-8'>
+        {{title}}
+      </h2>
+    {{/if}}
+
+    {{#if text}}
+      <div class='wysiwyg'>
+        {{markdown text}}
+      </div>
+    {{/if}}
+  </div>
+</section>

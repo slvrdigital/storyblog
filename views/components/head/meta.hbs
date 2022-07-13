@@ -1,0 +1,70 @@
+{{! Primary Meta Tags }}
+{{#if title}}
+  <title>
+    {{{concat title ' &ndash; ' @root.meta.siteName}}}
+  </title>
+  <meta
+    name='title'
+    content='{{{concat title " &ndash; " @root.meta.siteName}}}'
+  />
+{{else}}
+  <title>
+    {{{@root.meta.siteName}}}
+  </title>
+  <meta name='title' content='{{{@root.meta.siteName}}}' />
+{{/if}}
+
+<meta
+  name='viewport'
+  content='width=device-width,minimum-scale=1,initial-scale=1'
+/>
+
+{{#if description}}
+  <meta name='description' content='{{{description}}}' />
+{{else}}
+  <meta name='description' content='{{{@root.meta.siteDescription}}}' />
+{{/if}}
+
+{{#if author}}
+  <meta name='author' content='{{{author}}}' />
+{{else}}
+  <meta name='author' content='{{{@root.meta.author}}}' />
+{{/if}}
+
+<meta property='og:type' content='website' />
+<meta property='twitter:card' content='summary_large_image' />
+
+{{#if title}}
+  <meta property='og:title' content='{{{title}}}' />
+  <meta property='twitter:title' content='{{{title}}}' />
+{{else}}
+  <meta property='og:title' content='{{{@root.meta.siteName}}}' />
+  <meta property='twitter:title' content='{{{@root.meta.siteName}}}' />
+{{/if}}
+
+{{#if description}}
+  <meta property='og:description' content='{{{description}}}' />
+  <meta property='twitter:description' content='{{{description}}}' />
+{{else}}
+  <meta property='og:description' content='{{{@root.meta.siteDescription}}}' />
+  <meta
+    property='twitter:description'
+    content='{{{@root.meta.siteDescription}}}'
+  />
+{{/if}}
+
+{{#if url}}
+  <meta property='og:url' content='{{{concat "/" url}}}' />
+  <meta property='twitter:url' content='{{{concat "/" url}}}' />
+{{else}}
+  <meta property='og:url' content='/' />
+  <meta property='twitter:url' content='/' />
+{{/if}}
+
+{{#if image}}
+  <meta property='og:image' content='{{{transformImage image "1200x628"}}}' />
+  <meta
+    property='twitter:image'
+    content='{{{transformImage image "1200x628"}}}'
+  />
+{{/if}}

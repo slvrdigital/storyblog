@@ -1,0 +1,67 @@
+{{{story.content._editable}}}
+
+{{#> 'partials/Header' class='bg-black text-white mb-10 pt-10 sm:pt-20 sm:mb-20' }}
+  <aside class="overflow-hidden mt-10 sm:mt-20">
+    <div class="container">
+      <ul class='flex space-x-6 overflow-auto md:grid md:grid-cols-2 md:gap-10 md:space-x-0 xl:gap-20'>
+        {{#each stories}}
+          <li class="min-w-[180px] {{#if (gt @index 1)}}md:hidden{{/if}} md:min-w-full">
+            {{#>
+              'Card'
+              title=content.title
+              image=content.cover.filename
+              color=content.cover.color
+              link=(concat '/' full_slug)
+              date=published_at
+            }}
+              Not found.
+            {{/Card}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <section class="py-10 text-center sm:py-20">
+      <div class="container">
+        {{> 'LinkNext' label='Explore more Stories' href=(routePath Routes.STORIES) }}
+      </div>
+    </section>
+  </aside>
+{{/partials/Header}}
+
+<main class="grid gap-10 sm:gap-20">
+  <ul class="grid gap-10 sm:gap-20">
+    {{#each posts}}
+      <li class="border-b pb-10 sm:pb-20">
+        {{#>
+          'Article'
+          title=content.title
+          image=content.cover.filename
+          color=content.cover.color
+          content=content.body
+          link=(concat '/' full_slug)
+          date=../published_at
+          tags=tag_list
+        }}
+          Not found.
+        {{/Article}}
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#each page.content.body}}
+    {{#> (concat 'bloks/' (lookup . 'component'))}}
+      Not found {{ component }}
+    {{/undefined}}
+  {{/each}}
+</main>
+
+<footer class="w-full text-center py-10 sm:py-20">
+  <div class="container">
+    {{> 'LinkNext' label='Archive' href=(routePath Routes.POSTS)}}
+  </div>
+</footer>
+
+{{#section 'script'}}
+  {{{story.content.amp_scripts}}}
+{{/section}}

@@ -1,0 +1,11 @@
+{{{story.content._editable}}}
+
+{{!-- <pre>
+  {{ json story }}
+</pre> --}}
+
+{{#> (concat 'content-types/' (lookup story.content 'component'))}}
+  {{#if isDev}}
+    {{> 'Debug' title=(concat 'Content type «<i>' story.content.component '</i>» not found') code=story }}
+  {{/if}}
+{{/undefined}}

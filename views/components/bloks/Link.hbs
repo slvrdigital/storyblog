@@ -1,0 +1,38 @@
+{{#if (and label reference)}}
+  <section class="text-center">
+    <div class="container">
+      <a
+        href='
+          {{#if (eq reference.linktype 'url')}}
+            {{{ reference.url }}}
+          {{else}}
+            {{{ concat '/' reference.cached_url }}}
+          {{/if}}
+        '
+        {{#if (eq reference.linktype 'url')}}
+          target="_blank"
+        {{/if}}
+        class="opacity-50 hover:opacity-100"
+      >
+        <span class='align-middle font-secondary text-lg xl:text-2xl'>
+          {{label}}
+        </span>
+
+        {{#if (eq reference.linktype 'url')}}
+          <svg
+            viewBox='0 0 24 24'
+            xmlns='http://www.w3.org/2000/svg'
+            fill-rule='evenodd'
+            clip-rule='evenodd'
+            fill='currentColor'
+            class='inline align-middle -rotate-45 w-5 xl:w-6'
+          >
+            <path
+              d='M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z'
+            ></path>
+          </svg>
+        {{/if}}
+      </a>
+    </div>
+  </section>
+{{/if}}

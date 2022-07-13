@@ -1,0 +1,62 @@
+<section>
+  <div class='container'>
+    <ul
+      class='
+        grid
+        gap-10
+        items-center
+        {{#if (eq columns '1')}}md:grid-cols-1{{/if}}
+        {{#if (eq columns '2')}}md:grid-cols-2{{/if}}
+        {{#if (eq columns '3')}}md:grid-cols-3{{/if}}
+        {{#if (eq columns '4')}}md:grid-cols-4{{/if}}
+        xl:gap-20
+      '
+    >
+      {{#each assets}}
+        <li>
+          <figure>
+            {{#if (assetTypeEq filename 'image') }}
+              <amp-img
+                alt='{{alt}}'
+                src='{{transformImage filename "0x1024"}}'
+                srcset='{{transformImage filename "0x640"}} 640w,
+                        {{transformImage filename "0x1024"}} 1024w'
+                attribution='{{alt}}'
+                width='{{lookup (imageSize filename) "width"}}'
+                height='{{lookup (imageSize filename) "height"}}'
+                layout='responsive'
+                class='fit-picture mx-auto w-full sm:max-h-[400px] sm:max-w-[480px] xl:max-h-[640px] xl:max-w-[768px]'
+              >
+              </amp-img>
+            {{/if}}
+
+            {{#if (assetTypeEq filename 'video') }}
+              <amp-video
+                width='480'
+                height='270'
+                src='{{filename}}'
+                layout='responsive'
+                controlsList='nodownload'
+                muted
+                autoplay
+                controls
+                class='mx-auto w-full sm:max-w-[480px] xl:max-w-[768px]'
+              >
+                <div fallback>
+                  <p>Your browser doesn't support HTML5 video.</p>
+                </div>
+                <source src='{{filename}}' type='video/mp4' />
+              </amp-video>
+            {{/if}}
+
+            {{#if copyright}}
+              <figcaption>
+                <p>{{{ copyright }}}</p>
+              </figcaption>
+            {{/if}}
+          </figure>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>

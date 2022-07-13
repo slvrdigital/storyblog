@@ -1,0 +1,30 @@
+{{{story.content._editable}}}
+
+<article class='pb-10 xl:pb-20'>
+  <div class='grid gap-10 xl:gap-20'>
+    <header class="text-center">
+      <div class='container'>
+        <h1 class='title-1 mb-4 xl:mb-6'>
+          {{story.content.title}}
+        </h1>
+        <p class='title-6 italic opacity-50'>
+          {{{published published_at}}}
+        </p>
+      </div>
+    </header>
+
+    <div class='grid gap-10 xl:gap-20'>
+      {{#each story.content.body}}
+        {{#> (concat 'bloks/' (lookup . 'component')) }}
+          {{#if @root.isDev}}
+            {{> 'Debug' title=(concat 'Blok «<i>' component '</i>» not found') code=this }}
+          {{/if}}
+        {{/undefined}}
+      {{/each}}
+    </div>
+  </div>
+</article>
+
+{{#section 'script'}}
+  <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+{{/section}}

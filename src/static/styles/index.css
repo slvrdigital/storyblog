@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-primary text-gray-800 font-normal;
+}
+
+main {
+  animation: fade-in 0.8s;
+}
+
+figure {
+  @apply m-0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  @apply overflow-auto;
+}
+
+.fit-picture img {
+  @apply object-contain;
+}
+
+.title-1 {
+  @apply text-5xl;
+}
+
+.title-2 {
+  @apply text-4xl;
+}
+
+.title-3 {
+  @apply text-3xl;
+}
+
+.title-4 {
+  @apply text-2xl;
+}
+
+.title-5 {
+  @apply text-xl;
+}
+
+.title-6 {
+  @apply text-lg;
+}
+
+.wysiwyg a {
+  @apply italic opacity-50;
+}
+
+.wysiwyg a:hover {
+  @apply opacity-100;
+}
+
+.wysiwyg {
+  @apply text-lg leading-relaxed;
+}
+
+.wysiwyg p:not(:last-child) {
+  @apply mb-2;
+}
+
+@screen xl {
+  .title-1 {
+    @apply text-7xl;
+  }
+
+  .title-2 {
+    @apply text-6xl;
+  }
+
+  .title-3 {
+    @apply text-5xl;
+  }
+
+  .title-4 {
+    @apply text-4xl;
+  }
+
+  .title-5 {
+    @apply text-3xl;
+  }
+
+  .title-6 {
+    @apply text-2xl;
+  }
+
+  .wysiwyg {
+    @apply text-2xl leading-relaxed;
+  }
+
+  .wysiwyg p:not(:last-child) {
+    @apply mb-4;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

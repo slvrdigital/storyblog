@@ -1,0 +1,35 @@
+<!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset='utf-8' />
+    {{>
+      'head/meta'
+      title=story.content.meta.title
+      description=story.content.meta.description
+      author=meta.author
+      image=story.content.cover.filename
+      url=story.full_slug
+    }}
+    {{> 'head/links' canonical=(concat '/' story.full_slug) }}
+    {{> 'head/styles' }}
+    {{{_sections.schema}}}
+
+    <script async src='https://cdn.ampproject.org/v0.js'></script>
+    {{{_sections.script}}}
+  </head>
+
+  <body class="{{#if (eq theme 'dark')}}bg-black text-white{{/if}}">
+    {{{body}}}
+
+    {{#if post.content._editable}}
+      <script
+        type='text/javascript'
+        src='//app.storyblok.com/f/storyblok-latest.js'
+      ></script>
+      <script type='text/javascript'>
+        storyblok.init(); // On the change event refresh the window
+        storyblok.on('change', function() { window.location.reload(true); });
+      </script>
+    {{/if}}
+  </body>
+</html>

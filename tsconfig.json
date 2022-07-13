@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": ".output",
+    "baseUrl": ".",
+    "paths": {
+      "~~/*": ["./*"],
+      "@/*": ["src/*"]
+    },
+    "types": ["@types/lodash", "./src/types"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "./public/*", "./src/static/*"]
+}

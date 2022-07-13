@@ -1,0 +1,33 @@
+<ul class='max-w-xs mx-auto flex space-x-10 justify-center sm:space-x-20'>
+  <li class='font-secondary text-lg xl:text-2xl'>
+    {{#if pagination.prev.active}}
+      <a href='{{prevPage}}' class='opacity-50 hover:opacity-100'>
+        <span>
+          Back
+        </span>
+      </a>
+    {{else}}
+      <a href='#' class='opacity-20 cursor-not-allowed pointer-events-none'>
+        <span>
+          Back
+        </span>
+      </a>
+    {{/if}}
+  </li>
+
+  <li class='font-secondary text-lg xl:text-2xl'>
+    {{#if pagination.next.active}}
+      <a href='{{nextPage}}' class='opacity-50 hover:opacity-100'>
+        <span>
+          Next
+        </span>
+      </a>
+    {{else}}
+      <a href='#' class='opacity-20 cursor-not-allowed pointer-events-none'>
+        <span>
+          Next
+        </span>
+      </a>
+    {{/if}}
+  </li>
+</ul>

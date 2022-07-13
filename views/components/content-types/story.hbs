@@ -1,0 +1,73 @@
+{{{story.content._editable}}}
+
+<amp-story
+  standalone
+  {{#if story.content.landscapeSupport}}
+    supports-landscape
+  {{/if}}
+  title="{{story.content.title}}"
+  publisher="{{@root.meta.author}}"
+  publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
+  poster-portrait-src="{{{transformImage story.content.cover.filename "0x1280"}}}"
+>
+  <!-- Cover page -->
+  <amp-story-page id="cover">
+    <amp-story-grid-layer template="fill">
+      <amp-img
+        alt='{{story.content.title}}'
+        src='{{{transformImage story.content.cover.filename "0x1280"}}}'
+        srcset='{{{transformImage story.content.cover.filename "0x640"}}} 640w,
+                {{{transformImage story.content.cover.filename "0x1280"}}} 1024w'
+        attribution='{{story.content.title}}'
+        width='{{lookup (imageSize story.content.cover.filename) "width"}}'
+        height='{{lookup (imageSize story.content.cover.filename) "height"}}'
+        layout='responsive'
+      >
+      </amp-img>
+    </amp-story-grid-layer>
+  
+    <amp-story-grid-layer template="thirds">
+      <div grid-area="lower-third" class="self-end text-white text-center">
+        {{#if story.content.title}}
+          <h1 class='mb-4 text-3xl'>
+            {{story.content.title}}
+          </h1>
+        {{/if}}
+
+        {{#if story.content.subtitle}}
+          <p class="text-xl italic">
+            {{story.content.subtitle}}
+          </p>
+        {{/if}}
+      </div>
+    </amp-story-grid-layer>
+  </amp-story-page>
+
+  {{#each story.content.pages}}
+    <amp-story-page id="{{concat 'page' @index}}">
+      {{#> (concat 'bloks/' (lookup . 'component')) landscape=story.content.landscapeSupport }}
+        {{#if @root.isDev}}
+          {{> 'Debug' title=(concat 'Blok «<i>' component '</i>» not found') code=this }}
+        {{/if}}
+      {{/undefined}}
+    </amp-story-page>
+  {{/each}}
+
+  <!-- Bookend -->
+  <amp-story-bookend layout="nodisplay">
+    <script type="application/json">
+      {
+        "shareProviders": [
+          "facebook",
+          "twitter",
+          "email"
+        ]
+      }
+    </script>
+  </amp-story-bookend>
+</amp-story>
+
+{{#section 'script'}}
+  <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+  <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+{{/section}}

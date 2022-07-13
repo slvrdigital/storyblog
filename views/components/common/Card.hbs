@@ -1,0 +1,44 @@
+<article class='group'>
+  <a href='{{link}}'>
+    <div class='grid gap-4'>
+      <figure
+        class='overflow-hidden'
+        {{#if color}}
+          data-average-color="{{color}}"
+          style="background-color: {{color}}"
+        {{/if}}
+      >
+        <amp-img
+          alt='{{{title}}}'
+          src='{{{transformImage image "1280x960"}}}'
+          srcset='{{{transformImage image "640x480"}}} 640w,
+                  {{{transformImage image "1280x960"}}} 1024w'
+          attribution='{{{title}}}'
+          width='640'
+          height='480'
+          layout='responsive'
+          class='transition duration-500 scale-110 group-hover:scale-100'
+        >
+        </amp-img>
+      </figure>
+
+      <div class='grid gap-2'>
+        {{#if title}}
+          <h3 class='title-5 pr-2'>
+            {{#truncate title max=60}}
+              <span class='read-more'>
+                (...)
+              </span>
+            {{/truncate}}
+          </h3>
+        {{/if}}
+
+        {{#if date}}
+          <p class='text-xl italic opacity-50'>
+            {{{published date}}}
+          </p>
+        {{/if}}
+      </div>
+    </div>
+  </a>
+</article>

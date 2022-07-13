@@ -1,0 +1,68 @@
+{{{story.content._editable}}}
+
+<main>
+  {{#if tags}}
+    <header class="mb-10 sm:mb-20">
+      <div class="container">
+        <ul class="sm:text-center">
+          {{#each tags}}
+            <li class="inline">
+              {{#> 'Tag' label=(concat '#' name) items=taggings_count link=(concat (routePath @root.Routes.POSTS) '?tag=' name) active=(eq name ../tag) }}
+                Not found.
+              {{/Tag}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </header>
+  {{/if}}
+
+  {{#if (eq story.content.variant 'list')}}
+    <ul class="grid gap-10 sm:gap-20">
+      {{#each stories}}
+        <li class="border-b pb-10 sm:pb-20">
+          {{>
+            'Article'
+            title=content.title
+            image=content.cover.filename
+            link=(concat '/' full_slug)
+            date=../published_at
+            tags=tag_list
+          }}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if (eq story.content.variant 'grid')}}
+    <div class="container">
+      <ul class='grid gap-x-10 gap-y-14 md:grid-cols-2 xl:gap-x-20 xl:gap-y-24'>
+        {{#each stories}}
+          <li>
+            {{>
+              'Card'
+              title=content.title
+              image=content.cover.filename
+              link=(concat '/' full_slug)
+              date=published_at
+            }}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if (or pagination.prev.active pagination.next.active)}}
+    <footer class="py-10 sm:py-20">
+      {{>
+        'common/Pagination'
+        prevPage=(concat '/' story.full_slug '?page=' pagination.prev.page)
+        nextPage=(concat '/' story.full_slug '?page=' pagination.next.page)
+      }}
+    </footer>
+  {{/if}}
+</main>
+
+{{#section 'script'}}
+  {{!-- script --}}
+{{/section}}

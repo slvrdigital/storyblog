@@ -1,0 +1,52 @@
+<article class="group">
+  <div class='container'>
+    <div class='grid gap-6 sm:gap-10'>
+      {{#if image}}
+        <figure>
+          <a href='{{link}}'>
+            <amp-img
+              alt='{{{title}}}'
+              src='{{transformImage image "0x1024"}}'
+              srcset='{{transformImage image "0x640"}} 640w,
+                  {{transformImage image "0x1024"}} 1024w'
+              attribution='{{{title}}}'
+              width='{{lookup (imageSize image) "width"}}'
+              height='{{lookup (imageSize image) "height"}}'
+              layout='responsive'
+              class='fit-picture mx-auto sm:max-h-[400px] sm:max-w-[480px] xl:max-h-[640px] xl:max-w-[768px]'
+            >
+            </amp-img>
+          </a>
+        </figure>
+      {{/if}}
+
+      <header class="grid gap-6 md:text-center">
+        <p class='title-6 italic opacity-50'>
+          {{{published date}}}
+        </p>
+
+        <h3 class="title-3">
+          <a href='{{link}}'>
+            {{#truncate title max='80'}}
+              <span class='read-more'>
+                (...)
+              </span>
+            {{/truncate}}
+          </a>
+        </h3>
+
+        {{#if tags}}
+          <ul>
+            {{#each tags}}
+              <li class="inline">
+                {{#> 'Tag' label=(concat '#' this) link=(concat (routePath @root.Routes.POSTS) '?tag=' this) }}
+                  Not found.
+                {{/Tag}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </header>
+    </div>
+  </div>
+</article>
