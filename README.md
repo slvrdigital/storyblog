@@ -30,7 +30,7 @@ To start dev server use this command:
 $ yarn dev # or npm run dev
 ```
 
-## Deployment
+## Deploy
 
 ### Build
 
