@@ -13,5 +13,6 @@ Router(App)
 App.use(useErrorHandler)
 
 App.listen(process.env.PORT || 8080, function () {
-  console.log('App server is listening on port 8080')
+  const port = process.env.PORT || 8080
+  console.log(`App server is listening on port ${port}`)
 })

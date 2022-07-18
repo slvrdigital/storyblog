@@ -59,12 +59,18 @@ pre {
   @apply opacity-100;
 }
 
-.wysiwyg {
+.wysiwyg,
+.wysiwyg p {
   @apply text-lg leading-relaxed;
 }
 
 .wysiwyg p:not(:last-child) {
   @apply mb-2;
+}
+
+.wysiwyg--landscape,
+.wysiwyg--landscape p {
+  @apply text-xl leading-relaxed;
 }
 
 @screen xl {
@@ -92,12 +98,18 @@ pre {
     @apply text-2xl;
   }
 
-  .wysiwyg {
+  .wysiwyg,
+  .wysiwyg p {
     @apply text-2xl leading-relaxed;
   }
 
   .wysiwyg p:not(:last-child) {
     @apply mb-4;
+  }
+
+  .wysiwyg--landscape,
+  .wysiwyg--landscape p {
+    @apply text-2xl leading-relaxed;
   }
 }
 

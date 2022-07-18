@@ -1,3 +1,6 @@
+![AMP](/assets/amp.svg)
+![Storyblok](/assets/storyblok.svg)
+
 # AMP+Storyblok
 
 Node app with AMP &amp; Storyblok
@@ -6,48 +9,33 @@ Node app with AMP &amp; Storyblok
 - Storyblok
 - TailwindCSS
 - Handlebars
+- Schema.org
+- [Web Stories](https://amp.dev/about/stories/)
 
-## Install
+## Demo
 
-To install the project locally run:
+- [Heroku](https://storyblog-amp.herokuapp.com/)
 
-```
-$ yarn
-```
+## Development
 
-Then run postcss build & node serve using this command:
+Install project dependencies:
 
-```
-$ yarn start
-```
-
-Herokuapp: https://amp-storyblok.herokuapp.com/
-
-## Deploy to Herokuapp
-
-Before check is heroku is runing 'yarn start' with:
-
-```
-$ heroku local web
+```bash
+$ yarn # or npm i
 ```
 
-Then you can push everything and use Dynos:
+To start dev server use this command:
 
-```
-$ git push heroku master
-$ heroku ps:scale web=1
-$ heroku ps
-$ heroku open
+```bash
+$ yarn dev # or npm run dev
 ```
 
-Check errors:
+## Deployment
 
-```
-$ heroku logs --tail
-```
+### Build
 
-H10 error then run:
+Compile and minify code for production:
 
-```
-$ heroku restart
+```bash
+$ yarn build # or npm run build
 ```

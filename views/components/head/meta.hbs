@@ -1,17 +1,17 @@
 {{! Primary Meta Tags }}
 {{#if title}}
   <title>
-    {{{concat title ' &ndash; ' @root.meta.siteName}}}
+    {{{concat title ' &ndash; ' @root.meta.siteTitle}}}
   </title>
   <meta
     name='title'
-    content='{{{concat title " &ndash; " @root.meta.siteName}}}'
+    content='{{{concat title " &ndash; " @root.meta.siteTitle}}}'
   />
 {{else}}
   <title>
-    {{{@root.meta.siteName}}}
+    {{{@root.meta.siteTitle}}}
   </title>
-  <meta name='title' content='{{{@root.meta.siteName}}}' />
+  <meta name='title' content='{{{@root.meta.siteTitle}}}' />
 {{/if}}
 
 <meta
@@ -28,7 +28,7 @@
 {{#if author}}
   <meta name='author' content='{{{author}}}' />
 {{else}}
-  <meta name='author' content='{{{@root.meta.author}}}' />
+  <meta name='author' content='{{{@root.meta.authorName}}}' />
 {{/if}}
 
 <meta property='og:type' content='website' />
@@ -38,8 +38,8 @@
   <meta property='og:title' content='{{{title}}}' />
   <meta property='twitter:title' content='{{{title}}}' />
 {{else}}
-  <meta property='og:title' content='{{{@root.meta.siteName}}}' />
-  <meta property='twitter:title' content='{{{@root.meta.siteName}}}' />
+  <meta property='og:title' content='{{{@root.meta.siteTitle}}}' />
+  <meta property='twitter:title' content='{{{@root.meta.siteTitle}}}' />
 {{/if}}
 
 {{#if description}}

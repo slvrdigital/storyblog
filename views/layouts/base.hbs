@@ -6,10 +6,11 @@
       'head/meta'
       title=story.content.meta.title
       description=story.content.meta.description
-      author=meta.author
+      author=meta.authorName
       image=story.content.cover.filename
       url=story.full_slug
     }}
+    {{> 'head/favicon' }}
     {{> 'head/links' canonical=(concat '/' story.full_slug) }}
     {{> 'head/styles' }}
     {{{_sections.schema}}}

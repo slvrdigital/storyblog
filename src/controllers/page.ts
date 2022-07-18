@@ -20,7 +20,7 @@ function getStoriesList(slug: string, req: Request) {
   return getStories(slug, {
     withTag: tag?.toString(),
     page: !isNaN(+page) ? +page : 1,
-    perPage: 6,
+    perPage: 3,
     version
   })
 }
@@ -43,12 +43,13 @@ export async function getPage(req: Request, res: Response) {
   const path = req.path === Routes.INDEX ? homePath : req.path
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
 
-  if (path.includes(homePath)) {
+  if (req.path.includes(homePath)) {
     res.redirect(Routes.INDEX)
   }
 
   try {
     const response = await getStory(path, {
+      resolve: 'Grid.items',
       version
     })
     const story = get(response, 'data.story', null)

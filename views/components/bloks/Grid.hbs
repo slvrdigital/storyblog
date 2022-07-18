@@ -1,0 +1,39 @@
+
+<section>
+  {{#if (eq variant 'list')}}
+    <ul class='grid gap-10 sm:gap-20'>
+      {{#each items}}
+        <li class="border-b pb-10 sm:pb-20">
+          {{>
+            'Article'
+            title=content.title
+            image=content.cover.filename
+            color=content.cover.color
+            content=content.body
+            link=(concat '/' full_slug)
+            date=../published_at
+            tags=tag_list
+          }}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if (eq variant 'grid')}}
+    <div class="container">
+      <ul class='grid gap-x-10 gap-y-14 md:grid-cols-2 xl:gap-x-20 xl:gap-y-24'>
+        {{#each items}}
+          <li>
+            {{>
+              'Card'
+              title=content.title
+              image=content.cover.filename
+              link=(concat '/' full_slug)
+              date=published_at
+            }}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</section>

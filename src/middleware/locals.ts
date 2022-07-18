@@ -1,14 +1,19 @@
 import fs from 'fs/promises'
-import { get, kebabCase } from 'lodash'
+import { kebabCase } from 'lodash'
 import { Application, Request, Response, NextFunction } from 'express'
 import { Routes } from '@/types/enums'
 import config from '@/config'
+import { getSettings } from '@/services'
 
 function useMeta() {
   return {
-    siteName: config.name,
-    siteDescription: config.description,
-    author: config.author
+    siteLogo: config.site.logo,
+    siteUrl: config.site.url,
+    siteTitle: config.site.title,
+    siteDescription: config.site.description,
+    organizationLogo: config.organization.logo,
+    authorName: config.author.name,
+    authorUrl: config.author.url
   }
 }
 
@@ -24,6 +29,7 @@ export default function (App: Application): Application {
     res.locals = {
       Routes,
       meta: useMeta(),
+      settings: await getSettings(),
       isDev: process.env.NODE_ENV === 'development',
       style: await useInlineStyles(),
       slug: kebabCase(req.path === Routes.INDEX ? 'home' : req.path)

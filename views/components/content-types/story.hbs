@@ -1,42 +1,56 @@
-{{{story.content._editable}}}
-
 <amp-story
   standalone
   {{#if story.content.landscapeSupport}}
     supports-landscape
   {{/if}}
   title="{{story.content.title}}"
-  publisher="{{@root.meta.author}}"
-  publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
-  poster-portrait-src="{{{transformImage story.content.cover.filename "0x1280"}}}"
+  publisher="{{@root.meta.authorName}}"
+  publisher-logo-src="{{{@root.meta.siteLogo}}}"
+  poster-portrait-src="{{{transformImage story.content.cover.filename "720x1280"}}}"
 >
   <!-- Cover page -->
   <amp-story-page id="cover">
-    <amp-story-grid-layer template="fill">
-      <amp-img
-        alt='{{story.content.title}}'
-        src='{{{transformImage story.content.cover.filename "0x1280"}}}'
-        srcset='{{{transformImage story.content.cover.filename "0x640"}}} 640w,
-                {{{transformImage story.content.cover.filename "0x1280"}}} 1024w'
-        attribution='{{story.content.title}}'
-        width='{{lookup (imageSize story.content.cover.filename) "width"}}'
-        height='{{lookup (imageSize story.content.cover.filename) "height"}}'
-        layout='responsive'
-      >
-      </amp-img>
-    </amp-story-grid-layer>
+    {{#if (and story.content.landscapeSupport useragent.isDesktop)}}
+      <amp-story-grid-layer template="fill">
+        <amp-img
+          alt='{{story.content.title}}'
+          src='{{{transformImage story.content.cover.filename "1280x720"}}}'
+          srcset='{{{transformImage story.content.cover.filename "720x405"}}} 640w,
+                  {{{transformImage story.content.cover.filename "1280x720"}}} 1024w'
+          attribution='{{story.content.title}}'
+          width='720'
+          height='405'
+          layout='responsive'
+        >
+        </amp-img>
+      </amp-story-grid-layer>
+    {{else}}
+      <amp-story-grid-layer template="fill">
+        <amp-img
+          alt='{{story.content.title}}'
+          src='{{{transformImage story.content.cover.filename "720x1280"}}}'
+          srcset='{{{transformImage story.content.cover.filename "405x720"}}} 640w,
+                  {{{transformImage story.content.cover.filename "720x1280"}}} 1024w'
+          attribution='{{story.content.title}}'
+          width='405'
+          height='720'
+          layout='responsive'
+        >
+        </amp-img>
+      </amp-story-grid-layer>
+    {{/if}}
   
     <amp-story-grid-layer template="thirds">
-      <div grid-area="lower-third" class="self-end text-white text-center">
+      <div grid-area="lower-third" class="self-end text-white w-full max-w-xl mx-auto">
         {{#if story.content.title}}
-          <h1 class='mb-4 text-3xl'>
+          <h1 class='text-3xl'>
             {{story.content.title}}
           </h1>
         {{/if}}
 
-        {{#if story.content.subtitle}}
-          <p class="text-xl italic">
-            {{story.content.subtitle}}
+        {{#if story.published_at}}
+          <p class='mt-4 italic opacity-70'>
+            {{{published story.published_at}}}, by {{{@root.meta.authorName}}}
           </p>
         {{/if}}
       </div>
@@ -45,7 +59,7 @@
 
   {{#each story.content.pages}}
     <amp-story-page id="{{concat 'page' @index}}">
-      {{#> (concat 'bloks/' (lookup . 'component')) landscape=story.content.landscapeSupport }}
+      {{#> (concat 'bloks/' (lookup . 'component')) landscape=(and ../story.content.landscapeSupport @root.useragent.isDesktop) }}
         {{#if @root.isDev}}
           {{> 'Debug' title=(concat 'Blok «<i>' component '</i>» not found') code=this }}
         {{/if}}
@@ -57,15 +71,54 @@
   <amp-story-bookend layout="nodisplay">
     <script type="application/json">
       {
+        "bookendVersion": "v1.0",
         "shareProviders": [
-          "facebook",
-          "twitter",
-          "email"
+          {"provider": "facebook", "app_id": "254325784911610"},
+          {"provider": "twitter", "text": "{{{story.content.title}}}"},
+          {"provider": "whatsapp", "text": "{{{story.content.title}}}"}
+        ],
+        "components": [
+          {
+            "type": "heading",
+            "text": "{{{story.content.title}}}"
+          }
         ]
       }
     </script>
   </amp-story-bookend>
 </amp-story>
+
+{{#section 'schema'}}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{{concat @root.meta.siteUrl '/' story.full_slug}}}"
+      },
+      "headline": "{{{story.content.meta.title}}}",
+      "datePublished": "{{{story.first_published_at}}}",
+      "dateModified": "{{{story.published_at}}}",
+      "image": [
+        "{{{transformImage story.content.cover.filename '1280x1280'}}}",
+        "{{{transformImage story.content.cover.filename '1280x960'}}}",
+        "{{{transformImage story.content.cover.filename '1280x720'}}}"
+      ],
+      "author": [{
+        "@type": "Person",
+        "name": "{{{@root.meta.authorName}}}",
+        "url": "{{{@root.meta.authorUrl}}}"
+      }],
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{{@root.meta.authorName}}}",
+        "logo": "{{{@root.meta.organizationLogo}}}"
+      },
+      "description": "{{{story.content.meta.description}}}"
+    }
+  </script>
+{{/section}}
 
 {{#section 'script'}}
   <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>

@@ -2,6 +2,7 @@ import express, { Application } from 'express'
 import cors from 'cors'
 import compress from 'compression'
 import helmet from 'helmet'
+import useragent from 'express-useragent'
 
 export default function (App: Application): Application {
   console.info(`Booting the 'HTTP' middleware...`)
@@ -34,6 +35,9 @@ export default function (App: Application): Application {
 
   // Enables the "gzip" / "deflate" compression for response
   App.use(compress())
+
+  // Enables useragent detection
+  App.use(useragent.express())
 
   return App
 }

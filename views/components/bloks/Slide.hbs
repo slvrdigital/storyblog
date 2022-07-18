@@ -1,16 +1,18 @@
 {{#if use_custom_colors}}
   {{#if text}}
     <amp-story-grid-layer
-      template='vertical'
+      template='thirds'
       style='background-color: {{background_color.color}}; color: {{text_color.color}};'
     >
-      <div class='wysiwyg max-w-3xl mx-auto'>
-        {{markdown text}}
+      <div grid-area='middle-third' class='self-center w-full max-w-xl mx-auto'>
+        <div class='{{#if landscape}}wysiwyg wysiwyg--landscape{{else}}wysiwyg{{/if}}'>
+          {{markdown text}}
+        </div>
       </div>
     </amp-story-grid-layer>
   {{/if}}
 {{else}}
-  {{#if (and cover landscape)}}
+  {{#if landscape}}
     <amp-story-grid-layer template='fill'>
       {{#if (assetTypeEq cover.filename 'video')}}
         <amp-video
@@ -19,7 +21,6 @@
           width='1280'
           height='720'
           src='{{{cover.filename}}}'
-          poster='{{{transformImage cover.filename "1280x720"}}}'
           layout='responsive'
         >
           <div fallback>
@@ -51,7 +52,6 @@
           width='720'
           height='1280'
           src='{{{cover.filename}}}'
-          poster='{{{transformImage cover.filename "720x1280"}}}'
           layout='responsive'
         >
           <div fallback>
@@ -77,11 +77,13 @@
   {{/if}}
 
   {{#if text}}
-    <amp-story-grid-layer template='vertical' class='bg-black bg-opacity-50'>
-      <div class='wysiwyg text-white max-w-3xl mx-auto'>
-        {{landscape}}
-        {{../../../landscapeSupport}}
-        {{markdown text}}
+    <amp-story-grid-layer template='thirds' class='bg-black bg-opacity-70'>
+      <div grid-area='middle-third' class='self-center w-full max-w-xl mx-auto'>
+        <div class='text-white'>
+          <div class='{{#if landscape}}wysiwyg wysiwyg--landscape{{else}}wysiwyg{{/if}}'>
+            {{{markdown text}}}
+          </div>
+        </div>
       </div>
     </amp-story-grid-layer>
   {{/if}}

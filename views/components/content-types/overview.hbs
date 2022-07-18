@@ -1,8 +1,6 @@
-{{{story.content._editable}}}
-
-<main>
+<main class="grid gap-10 py-10 sm:gap-20 sm:py-20">
   {{#if tags}}
-    <header class="mb-10 sm:mb-20">
+    <header>
       <div class="container">
         <ul class="sm:text-center">
           {{#each tags}}
@@ -53,7 +51,7 @@
   {{/if}}
 
   {{#if (or pagination.prev.active pagination.next.active)}}
-    <footer class="py-10 sm:py-20">
+    <footer>
       {{>
         'common/Pagination'
         prevPage=(concat '/' story.full_slug '?page=' pagination.prev.page)
@@ -62,6 +60,21 @@
     </footer>
   {{/if}}
 </main>
+
+{{#section 'schema'}}
+  <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "{{{story.content.meta.title}}}",
+      "description": "{{{story.content.meta.description}}}",
+      "publisher": {
+        "@type": "Person",
+        "name": "{{{@root.meta.authorName}}}"
+      }
+    }
+  </script>
+{{/section}}
 
 {{#section 'script'}}
   {{!-- script --}}

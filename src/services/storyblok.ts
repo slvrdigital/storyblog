@@ -31,9 +31,11 @@ export const Storyblok = new StoryblokClient({
   }
 })
 
-export function usePagination(req: Request, res: StoryblokResult) {
+export function usePagination(req: Request, results: StoryblokResult) {
   const page = +get(req.query, 'page', 1)
-  const pages = Math.max(get(res, 'total', 0) / get(res, 'perPage', 0))
+  const perPage = get(results, 'perPage', 0)
+  const total = get(results, 'total', 0)
+  const pages = Math.ceil(total / perPage)
   const hasNextPage = page < pages
   const hasPrevPage = page > 1 && page <= pages
 
@@ -75,4 +77,12 @@ export function getTags(slug: string, params?: StoryblokParams) {
     starts_with: slug,
     version: params?.version ?? DataVersion.PUBLISHED
   })
+}
+
+export async function getSettings(params?: StoryblokParams) {
+  const response = await getPage('settings', {
+    version: params?.version ?? DataVersion.PUBLISHED
+  })
+
+  return get(response, 'data.story.content', null)
 }

@@ -1,13 +1,13 @@
-{{{story.content._editable}}}
-
-<main class="grid gap-10 pb-10 sm:gap-20 sm:pb-20">
-  <header>
-    <div class="container">
-      <h1 class='title-1'>
-        {{ story.name }}
-      </h1>
-    </div>
-  </header>
+<main class="grid gap-10 py-10 sm:gap-20 sm:py-20">
+  {{#if (ne story.path Routes.INDEX)}}
+    <header>
+      <div class="container">
+        <h1 class='title-1'>
+          {{ story.name }}
+        </h1>
+      </div>
+    </header>
+  {{/if}}
 
   {{#each story.content.body}}
     {{#> (concat 'bloks/' (lookup . 'component'))}}
@@ -27,7 +27,7 @@
       "description": "{{{story.content.meta.description}}}",
       "publisher": {
         "@type": "Person",
-        "name": "{{{@root.meta.author}}}"
+        "name": "{{{@root.meta.authorName}}}"
       }
     }
   </script>

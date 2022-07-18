@@ -70,6 +70,9 @@ export function concat() {
 }
 
 // @ts-ignore
+export const includes = (v1, v2) => v1.includes(v2)
+
+// @ts-ignore
 export const eq = (v1, v2) => v1 === v2
 
 // @ts-ignore
